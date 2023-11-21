@@ -121,60 +121,60 @@ for timestamp in timeToSend:
 
 
 
-while repeat <= -1 or repeat > 0:
+# while repeat <= -1 or repeat > 0:
 
-    if dateLastSent == datetime.datetime.today().strftime('%Y-%m-%d'):
-        WaitUntilNextMorning()
+#     if dateLastSent == datetime.datetime.today().strftime('%Y-%m-%d'):
+#         WaitUntilNextMorning()
         
 
-    textToSend = random.choice(textMessages) #select a random text message
+#     textToSend = random.choice(textMessages) #select a random text message
 
 
-    if len(timeToSend) == 1: #if there is just one timestamp given, calculate the amount of seconds until when the bot should send the message
-        h, m, s = timeToSend[0].split(':')
-        timeToSendSeconds = (int(h) * 3600 + int(m) * 60 + int(s)) #the time in the config file, converted to seconds
+#     if len(timeToSend) == 1: #if there is just one timestamp given, calculate the amount of seconds until when the bot should send the message
+#         h, m, s = timeToSend[0].split(':')
+#         timeToSendSeconds = (int(h) * 3600 + int(m) * 60 + int(s)) #the time in the config file, converted to seconds
 
-        h, m, s = time.ctime()[11:19].split(':')
-        currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
+#         h, m, s = time.ctime()[11:19].split(':')
+#         currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
 
-        timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
+#         timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
 
-    elif len(timeToSend) == 2: #There are 2 timestamps, so we will select a random time between the two
-        h, m, s = timeToSend[0].split(':')
-        timeStampOne = (int(h) * 3600 + int(m) * 60 + int(s)) #the first timestamp in the config file, converted to seconds
+#     elif len(timeToSend) == 2: #There are 2 timestamps, so we will select a random time between the two
+#         h, m, s = timeToSend[0].split(':')
+#         timeStampOne = (int(h) * 3600 + int(m) * 60 + int(s)) #the first timestamp in the config file, converted to seconds
 
-        h, m, s = timeToSend[1].split(':')
-        timeStampTwo = (int(h) * 3600 + int(m) * 60 + int(s)) #the second timestamp in the config file, converted to seconds
+#         h, m, s = timeToSend[1].split(':')
+#         timeStampTwo = (int(h) * 3600 + int(m) * 60 + int(s)) #the second timestamp in the config file, converted to seconds
 
-        h, m, s = time.ctime()[11:19].split(':')
-        currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
+#         h, m, s = time.ctime()[11:19].split(':')
+#         currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
 
-        if timeStampOne <= timeStampTwo:
-            timeToSendSeconds = random.randrange(timeStampOne, timeStampTwo) #select a random time, between the two timestamps from the config file
-        else:
-            timeToSendSeconds = random.randrange(timeStampTwo, timeStampOne)
+#         if timeStampOne <= timeStampTwo:
+#             timeToSendSeconds = random.randrange(timeStampOne, timeStampTwo) #select a random time, between the two timestamps from the config file
+#         else:
+#             timeToSendSeconds = random.randrange(timeStampTwo, timeStampOne)
 
-        timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
+#         timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
 
 
 
-    WriteToLogFile("'" + textToSend + "' will be send at: " + str(datetime.timedelta(seconds=timeToSendSeconds + currentTime)))
-    time.sleep(timeToSendSeconds) #hiberante/pause the program, until it can send the message
+#     WriteToLogFile("'" + textToSend + "' will be send at: " + str(datetime.timedelta(seconds=timeToSendSeconds + currentTime)))
+#     time.sleep(timeToSendSeconds) #hiberante/pause the program, until it can send the message
     
 
-    payload = {
-        'content': textToSend
-    }
+#     payload = {
+#         'content': textToSend
+#     }
 
-    header = {
-        'authorization': userToken
-    }
+#     header = {
+#         'authorization': userToken
+#     }
 
-    r = requests.post(requestUrl, data=payload, headers=header) #make a webrequest AKA send the message
-    WriteToLogFile("Message sent")
-    dateLastSent = datetime.datetime.today().strftime('%Y-%m-%d')
+#     r = requests.post(requestUrl, data=payload, headers=header) #make a webrequest AKA send the message
+#     WriteToLogFile("Message sent")
+#     dateLastSent = datetime.datetime.today().strftime('%Y-%m-%d')
 
-    repeat -= 1
+#     repeat -= 1
 
 
 WriteToLogFile("Closing the bot")
