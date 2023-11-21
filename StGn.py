@@ -8,12 +8,12 @@ import datetime
 
 def WriteToLogFile(data):
     print(data)
-    today = datetime.datetime.now() #get the current datetime
-    today = today.strftime("%m/%d/%Y, %H:%M:%S") #convert the current datetime to a string
-
-    f = open("StGnLogfile.txt", "a") #open/create a file and append to it
-    f.write(today + " | " + data + "\n") #write the datetime and the data on a new line
-    f.close() #close the file
+    # today = datetime.datetime.now() #get the current datetime
+    # today = today.strftime("%m/%d/%Y, %H:%M:%S") #convert the current datetime to a string
+# 
+    # f = open("StGnLogfile.txt", "a") #open/create a file and append to it
+    # f.write(today + " | " + data + "\n") #write the datetime and the data on a new line
+    # f.close() #close the file
 
 def WaitUntilNextMorning():
     #Wait until tomorrow 00:00 am
@@ -56,50 +56,41 @@ dateLastSent = ""
 
 # error handling
 
-print("1")
 
 if 'discord' not in requestUrl or not validators.url(requestUrl):
     WriteToLogFile("ERROR - Please enter a valid url.")
     raise ValueError('Please enter a valid url.')
-print("2")
 
 if userToken == "":
     WriteToLogFile("ERROR - Please enter a Discord token in the config file")
     raise ValueError('Please enter a Discord token in the config file')
-print("3")
 
 if not textMessages[0]:
     WriteToLogFile("ERROR - Please enter at least one message for the bot to send.")
     raise ValueError('Please enter at least one message for the bot to send.')
-print("4")
 
 for message in textMessages:
     if message == "":
         WriteToLogFile("ERROR - Please make sure that each textmessage in the config file is at least one character long.")
         raise ValueError('Please make sure that each textmessage in the config file is at least one character long.')
-print("5")
 
 try:
     repeat = int(repeat)
 except:
     WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
     raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
-print("6")
 
 if repeat < -1 or repeat == 0:
     WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
     raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
-print("7")
 
 if not timeToSend[0]:
     WriteToLogFile("ERROR - Please enter at least one timestamp in the config file")
     raise ValueError('Please enter at least one timestamp in the config file')
-print("8")
 
 if len(timeToSend) > 2:
     WriteToLogFile("ERROR - Please only enter a maximum of 2 timestamps in the config file")
     raise ValueError('Please only enter a maximum of 2 timestamps in the config file')
-print("9")
 
 for timestamp in timeToSend:
         try:
@@ -164,7 +155,7 @@ elif len(timeToSend) == 2: #There are 2 timestamps, so we will select a random t
 
 
 WriteToLogFile("'" + textToSend + "' will be send at: " + str(datetime.timedelta(seconds=timeToSendSeconds + currentTime)))
-time.sleep(timeToSendSeconds) #hiberante/pause the program, until it can send the message
+#time.sleep(timeToSendSeconds) #hiberante/pause the program, until it can send the message
 
 
 payload = {
