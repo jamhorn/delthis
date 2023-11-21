@@ -17,12 +17,12 @@ def WriteToLogFile(data):
 
 def WaitUntilNextMorning():
     #Wait until tomorrow 00:00 am
-    t = time.localtime()
-    t = time.mktime(t[:3] + (0,0,0) + t[6:])
+    # t = time.localtime()
+    # t = time.mktime(t[:3] + (0,0,0) + t[6:])
     secondsUntilMidnight = t + 24*3600 - time.time()
-    secondsUntilMidnight += 60
+    # secondsUntilMidnight += 60
     WriteToLogFile("Pausing the bot until the next day (pausing for this long: '" + str(datetime.timedelta(seconds=secondsUntilMidnight)) + "')")
-    time.sleep(secondsUntilMidnight)
+    # time.sleep(secondsUntilMidnight)
 
 
 
@@ -101,90 +101,85 @@ if len(timeToSend) > 2:
     raise ValueError('Please only enter a maximum of 2 timestamps in the config file')
 print("9")
 
-# for timestamp in timeToSend:
-#         try:
-#             time.strptime(timestamp, '%H:%M:%S')
-#         except:
-#             WriteToLogFile("ERROR - Please make sure that all timestamps are in the following format: hh:mm:ss")
-#             raise ValueError('Please make sure that all timestamps are in the following format: hh:mm:ss')
+for timestamp in timeToSend:
+        try:
+            time.strptime(timestamp, '%H:%M:%S')
+        except:
+            WriteToLogFile("ERROR - Please make sure that all timestamps are in the following format: hh:mm:ss")
+            raise ValueError('Please make sure that all timestamps are in the following format: hh:mm:ss')
 
 
 
-#         h, m, s = timestamp.split(':')
-#         timeToSendSeconds = (int(h) * 3600 + int(m) * 60 + int(s)) #the time in the config file, converted to seconds
+        h, m, s = timestamp.split(':')
+        timeToSendSeconds = (int(h) * 3600 + int(m) * 60 + int(s)) #the time in the config file, converted to seconds
 
-#         h, m, s = time.ctime()[11:19].split(':')
-#         currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
+        h, m, s = time.ctime()[11:19].split(':')
+        currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
                 
-#         timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
+        timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
         
-#         if timeToSendSeconds - 5 <= 0:
-#             WriteToLogFile("WARNING - One of the timestamps (" + timestamp + ") occured before the current time (" + time.ctime()[11:19] + "). Therefore, the bot will sleep until the next day before sending a message.")
-#             WaitUntilNextMorning()
-#             break
+        if timeToSendSeconds - 5 <= 0:
+            WriteToLogFile("WARNING - One of the timestamps (" + timestamp + ") occured before the current time (" + time.ctime()[11:19] + "). Therefore, the bot will sleep until the next day before sending a message.")
+            WaitUntilNextMorning()
+            break
 
 
 
 
-# print("kaas")
+while repeat <= -1 or repeat > 0:
+
+    if dateLastSent == datetime.datetime.today().strftime('%Y-%m-%d'):
+        WaitUntilNextMorning()
+        
+
+    textToSend = random.choice(textMessages) #select a random text message
+
+
+    if len(timeToSend) == 1: #if there is just one timestamp given, calculate the amount of seconds until when the bot should send the message
+        h, m, s = timeToSend[0].split(':')
+        timeToSendSeconds = (int(h) * 3600 + int(m) * 60 + int(s)) #the time in the config file, converted to seconds
+
+        h, m, s = time.ctime()[11:19].split(':')
+        currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
+
+        timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
+
+    elif len(timeToSend) == 2: #There are 2 timestamps, so we will select a random time between the two
+        h, m, s = timeToSend[0].split(':')
+        timeStampOne = (int(h) * 3600 + int(m) * 60 + int(s)) #the first timestamp in the config file, converted to seconds
+
+        h, m, s = timeToSend[1].split(':')
+        timeStampTwo = (int(h) * 3600 + int(m) * 60 + int(s)) #the second timestamp in the config file, converted to seconds
+
+        h, m, s = time.ctime()[11:19].split(':')
+        currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
+
+        if timeStampOne <= timeStampTwo:
+            timeToSendSeconds = random.randrange(timeStampOne, timeStampTwo) #select a random time, between the two timestamps from the config file
+        else:
+            timeToSendSeconds = random.randrange(timeStampTwo, timeStampOne)
+
+        timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
 
 
 
-
-# # while repeat <= -1 or repeat > 0:
-
-# if dateLastSent == datetime.datetime.today().strftime('%Y-%m-%d'):
-#     WaitUntilNextMorning()
-    
-
-# textToSend = random.choice(textMessages) #select a random text message
+    WriteToLogFile("'" + textToSend + "' will be send at: " + str(datetime.timedelta(seconds=timeToSendSeconds + currentTime)))
+    time.sleep(timeToSendSeconds) #hiberante/pause the program, until it can send the message
 
 
-# if len(timeToSend) == 1: #if there is just one timestamp given, calculate the amount of seconds until when the bot should send the message
-#     h, m, s = timeToSend[0].split(':')
-#     timeToSendSeconds = (int(h) * 3600 + int(m) * 60 + int(s)) #the time in the config file, converted to seconds
+    payload = {
+        'content': textToSend
+    }
 
-#     h, m, s = time.ctime()[11:19].split(':')
-#     currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
+    header = {
+        'authorization': userToken
+    }
 
-#     timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
+    r = requests.post(requestUrl, data=payload, headers=header) #make a webrequest AKA send the message
+    WriteToLogFile("Message sent")
+    dateLastSent = datetime.datetime.today().strftime('%Y-%m-%d')
 
-# elif len(timeToSend) == 2: #There are 2 timestamps, so we will select a random time between the two
-#     h, m, s = timeToSend[0].split(':')
-#     timeStampOne = (int(h) * 3600 + int(m) * 60 + int(s)) #the first timestamp in the config file, converted to seconds
-
-#     h, m, s = timeToSend[1].split(':')
-#     timeStampTwo = (int(h) * 3600 + int(m) * 60 + int(s)) #the second timestamp in the config file, converted to seconds
-
-#     h, m, s = time.ctime()[11:19].split(':')
-#     currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
-
-#     if timeStampOne <= timeStampTwo:
-#         timeToSendSeconds = random.randrange(timeStampOne, timeStampTwo) #select a random time, between the two timestamps from the config file
-#     else:
-#         timeToSendSeconds = random.randrange(timeStampTwo, timeStampOne)
-
-#     timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
+    repeat -= 1
 
 
-
-# WriteToLogFile("'" + textToSend + "' will be send at: " + str(datetime.timedelta(seconds=timeToSendSeconds + currentTime)))
-# time.sleep(timeToSendSeconds) #hiberante/pause the program, until it can send the message
-
-
-# payload = {
-#     'content': textToSend
-# }
-
-# header = {
-#     'authorization': userToken
-# }
-
-# r = requests.post(requestUrl, data=payload, headers=header) #make a webrequest AKA send the message
-# WriteToLogFile("Message sent")
-# dateLastSent = datetime.datetime.today().strftime('%Y-%m-%d')
-
-# repeat -= 1
-
-
-# WriteToLogFile("Closing the bot")
+WriteToLogFile("Closing the bot")
