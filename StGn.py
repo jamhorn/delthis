@@ -17,7 +17,7 @@ def WriteToLogFile(data):
 
 def WaitUntilNextMorning():
     #Wait until tomorrow 00:00 am
-    # t = time.localtime()
+    t = time.localtime()
     # t = time.mktime(t[:3] + (0,0,0) + t[6:])
     secondsUntilMidnight = t + 24*3600 - time.time()
     # secondsUntilMidnight += 60
