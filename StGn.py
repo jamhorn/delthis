@@ -54,7 +54,7 @@ repeat = config['config']['repeat']
 dateLastSent = ""
 
 
-error handling
+# error handling
 if 'discord' not in requestUrl or not validators.url(requestUrl):
     WriteToLogFile("ERROR - Please enter a valid url.")
     raise ValueError('Please enter a valid url.')
