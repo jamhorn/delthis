@@ -91,10 +91,10 @@ if repeat < -1 or repeat == 0:
     raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
 print("7")
 
-# if not timeToSend[0]:
-#     WriteToLogFile("ERROR - Please enter at least one timestamp in the config file")
-#     raise ValueError('Please enter at least one timestamp in the config file')
-# print("8")
+if not timeToSend[0]:
+    WriteToLogFile("ERROR - Please enter at least one timestamp in the config file")
+    raise ValueError('Please enter at least one timestamp in the config file')
+print("8")
 
 # if len(timeToSend) > 2:
 #     WriteToLogFile("ERROR - Please only enter a maximum of 2 timestamps in the config file")
