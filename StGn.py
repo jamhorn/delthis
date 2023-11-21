@@ -25,6 +25,7 @@ def WaitUntilNextMorning():
     time.sleep(secondsUntilMidnight)
 
 
+print("hello world")
 
 #check if the config file exists
 if not os.path.isfile('config.ini'):
