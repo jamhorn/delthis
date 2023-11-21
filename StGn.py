@@ -86,10 +86,10 @@ except:
     raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
 print("6")
 
-# if repeat < -1 or repeat == 0:
-#     WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
-#     raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
-# print("7")
+if repeat < -1 or repeat == 0:
+    WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
+    raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
+print("7")
 
 # if not timeToSend[0]:
 #     WriteToLogFile("ERROR - Please enter at least one timestamp in the config file")
