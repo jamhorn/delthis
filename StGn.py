@@ -79,12 +79,12 @@ for message in textMessages:
         raise ValueError('Please make sure that each textmessage in the config file is at least one character long.')
 print("5")
 
-# try:
-#     repeat = int(repeat)
-# except:
-#     WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
-#     raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
-# print("6")
+try:
+    repeat = int(repeat)
+except:
+    WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
+    raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
+print("6")
 
 # if repeat < -1 or repeat == 0:
 #     WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
