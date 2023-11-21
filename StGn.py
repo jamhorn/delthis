@@ -55,40 +55,51 @@ dateLastSent = ""
 
 
 # error handling
+
+print("1")
+
 if 'discord' not in requestUrl or not validators.url(requestUrl):
     WriteToLogFile("ERROR - Please enter a valid url.")
     raise ValueError('Please enter a valid url.')
+print("2")
 
 if userToken == "":
     WriteToLogFile("ERROR - Please enter a Discord token in the config file")
     raise ValueError('Please enter a Discord token in the config file')
+print("3")
 
 if not textMessages[0]:
     WriteToLogFile("ERROR - Please enter at least one message for the bot to send.")
     raise ValueError('Please enter at least one message for the bot to send.')
+print("4")
 
 for message in textMessages:
     if message == "":
         WriteToLogFile("ERROR - Please make sure that each textmessage in the config file is at least one character long.")
         raise ValueError('Please make sure that each textmessage in the config file is at least one character long.')
+print("5")
 
 try:
     repeat = int(repeat)
 except:
     WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
     raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
+print("6")
 
 if repeat < -1 or repeat == 0:
     WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
     raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
+print("7")
 
 if not timeToSend[0]:
     WriteToLogFile("ERROR - Please enter at least one timestamp in the config file")
     raise ValueError('Please enter at least one timestamp in the config file')
+print("8")
 
 if len(timeToSend) > 2:
     WriteToLogFile("ERROR - Please only enter a maximum of 2 timestamps in the config file")
     raise ValueError('Please only enter a maximum of 2 timestamps in the config file')
+print("9")
 
 for timestamp in timeToSend:
         try:
