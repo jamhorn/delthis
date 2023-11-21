@@ -63,70 +63,70 @@ if 'discord' not in requestUrl or not validators.url(requestUrl):
     raise ValueError('Please enter a valid url.')
 print("2")
 
-if userToken == "":
-    WriteToLogFile("ERROR - Please enter a Discord token in the config file")
-    raise ValueError('Please enter a Discord token in the config file')
-print("3")
+# if userToken == "":
+#     WriteToLogFile("ERROR - Please enter a Discord token in the config file")
+#     raise ValueError('Please enter a Discord token in the config file')
+# print("3")
 
-if not textMessages[0]:
-    WriteToLogFile("ERROR - Please enter at least one message for the bot to send.")
-    raise ValueError('Please enter at least one message for the bot to send.')
-print("4")
+# if not textMessages[0]:
+#     WriteToLogFile("ERROR - Please enter at least one message for the bot to send.")
+#     raise ValueError('Please enter at least one message for the bot to send.')
+# print("4")
 
-for message in textMessages:
-    if message == "":
-        WriteToLogFile("ERROR - Please make sure that each textmessage in the config file is at least one character long.")
-        raise ValueError('Please make sure that each textmessage in the config file is at least one character long.')
-print("5")
+# for message in textMessages:
+#     if message == "":
+#         WriteToLogFile("ERROR - Please make sure that each textmessage in the config file is at least one character long.")
+#         raise ValueError('Please make sure that each textmessage in the config file is at least one character long.')
+# print("5")
 
-try:
-    repeat = int(repeat)
-except:
-    WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
-    raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
-print("6")
+# try:
+#     repeat = int(repeat)
+# except:
+#     WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
+#     raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
+# print("6")
 
-if repeat < -1 or repeat == 0:
-    WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
-    raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
-print("7")
+# if repeat < -1 or repeat == 0:
+#     WriteToLogFile("ERROR - Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.")
+#     raise ValueError('Please enter a numerical value greater than or equal to -1, that isn\'t 0 as the repeat value.')
+# print("7")
 
-if not timeToSend[0]:
-    WriteToLogFile("ERROR - Please enter at least one timestamp in the config file")
-    raise ValueError('Please enter at least one timestamp in the config file')
-print("8")
+# if not timeToSend[0]:
+#     WriteToLogFile("ERROR - Please enter at least one timestamp in the config file")
+#     raise ValueError('Please enter at least one timestamp in the config file')
+# print("8")
 
-if len(timeToSend) > 2:
-    WriteToLogFile("ERROR - Please only enter a maximum of 2 timestamps in the config file")
-    raise ValueError('Please only enter a maximum of 2 timestamps in the config file')
-print("9")
+# if len(timeToSend) > 2:
+#     WriteToLogFile("ERROR - Please only enter a maximum of 2 timestamps in the config file")
+#     raise ValueError('Please only enter a maximum of 2 timestamps in the config file')
+# print("9")
 
-for timestamp in timeToSend:
-        try:
-            time.strptime(timestamp, '%H:%M:%S')
-        except:
-            WriteToLogFile("ERROR - Please make sure that all timestamps are in the following format: hh:mm:ss")
-            raise ValueError('Please make sure that all timestamps are in the following format: hh:mm:ss')
+# for timestamp in timeToSend:
+#         try:
+#             time.strptime(timestamp, '%H:%M:%S')
+#         except:
+#             WriteToLogFile("ERROR - Please make sure that all timestamps are in the following format: hh:mm:ss")
+#             raise ValueError('Please make sure that all timestamps are in the following format: hh:mm:ss')
 
 
 
-        h, m, s = timestamp.split(':')
-        timeToSendSeconds = (int(h) * 3600 + int(m) * 60 + int(s)) #the time in the config file, converted to seconds
+#         h, m, s = timestamp.split(':')
+#         timeToSendSeconds = (int(h) * 3600 + int(m) * 60 + int(s)) #the time in the config file, converted to seconds
 
-        h, m, s = time.ctime()[11:19].split(':')
-        currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
+#         h, m, s = time.ctime()[11:19].split(':')
+#         currentTime = (int(h) * 3600 + int(m) * 60 + int(s)) #the current time, converted to seconds
                 
-        timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
+#         timeToSendSeconds -= currentTime #amount of seconds until we need to send the message
         
-        if timeToSendSeconds - 5 <= 0:
-            WriteToLogFile("WARNING - One of the timestamps (" + timestamp + ") occured before the current time (" + time.ctime()[11:19] + "). Therefore, the bot will sleep until the next day before sending a message.")
-            WaitUntilNextMorning()
-            break
+#         if timeToSendSeconds - 5 <= 0:
+#             WriteToLogFile("WARNING - One of the timestamps (" + timestamp + ") occured before the current time (" + time.ctime()[11:19] + "). Therefore, the bot will sleep until the next day before sending a message.")
+#             WaitUntilNextMorning()
+#             break
 
 
 
 
-print("kaas")
+# print("kaas")
 
 
 
