@@ -63,10 +63,10 @@ if 'discord' not in requestUrl or not validators.url(requestUrl):
     raise ValueError('Please enter a valid url.')
 print("2")
 
-# if userToken == "":
-#     WriteToLogFile("ERROR - Please enter a Discord token in the config file")
-#     raise ValueError('Please enter a Discord token in the config file')
-# print("3")
+if userToken == "":
+    WriteToLogFile("ERROR - Please enter a Discord token in the config file")
+    raise ValueError('Please enter a Discord token in the config file')
+print("3")
 
 # if not textMessages[0]:
 #     WriteToLogFile("ERROR - Please enter at least one message for the bot to send.")
