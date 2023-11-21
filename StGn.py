@@ -20,7 +20,7 @@ def WaitUntilNextMorning():
     t = time.localtime()
     t = time.mktime(t[:3] + (0,0,0) + t[6:])
     secondsUntilMidnight = t + 24*3600 - time.time()
-    # secondsUntilMidnight += 60
+    secondsUntilMidnight += 60
     WriteToLogFile("Pausing the bot until the next day (pausing for this long: '" + str(datetime.timedelta(seconds=secondsUntilMidnight)) + "')")
     # time.sleep(secondsUntilMidnight)
 
