@@ -26,4 +26,8 @@ jobs:
           REQUESTURL: ${{ secrets.REQUESTURL }}
           TOKEN: ${{ secrets.TOKEN }}
         run: |
-          python StGn.py
+          output=$(python StGn.py)
+          echo "::set-output name=changelog::$output"
+        id: step1
+      - name: Print script output
+        run: echo "${{ steps.step1.outputs.changelog }}"
