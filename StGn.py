@@ -68,10 +68,10 @@ if userToken == "":
     raise ValueError('Please enter a Discord token in the config file')
 print("3")
 
-# if not textMessages[0]:
-#     WriteToLogFile("ERROR - Please enter at least one message for the bot to send.")
-#     raise ValueError('Please enter at least one message for the bot to send.')
-# print("4")
+if not textMessages[0]:
+    WriteToLogFile("ERROR - Please enter at least one message for the bot to send.")
+    raise ValueError('Please enter at least one message for the bot to send.')
+print("4")
 
 # for message in textMessages:
 #     if message == "":
