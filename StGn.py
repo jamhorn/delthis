@@ -96,10 +96,10 @@ if not timeToSend[0]:
     raise ValueError('Please enter at least one timestamp in the config file')
 print("8")
 
-# if len(timeToSend) > 2:
-#     WriteToLogFile("ERROR - Please only enter a maximum of 2 timestamps in the config file")
-#     raise ValueError('Please only enter a maximum of 2 timestamps in the config file')
-# print("9")
+if len(timeToSend) > 2:
+    WriteToLogFile("ERROR - Please only enter a maximum of 2 timestamps in the config file")
+    raise ValueError('Please only enter a maximum of 2 timestamps in the config file')
+print("9")
 
 # for timestamp in timeToSend:
 #         try:
