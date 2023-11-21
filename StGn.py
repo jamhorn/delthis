@@ -73,11 +73,11 @@ if not textMessages[0]:
     raise ValueError('Please enter at least one message for the bot to send.')
 print("4")
 
-# for message in textMessages:
-#     if message == "":
-#         WriteToLogFile("ERROR - Please make sure that each textmessage in the config file is at least one character long.")
-#         raise ValueError('Please make sure that each textmessage in the config file is at least one character long.')
-# print("5")
+for message in textMessages:
+    if message == "":
+        WriteToLogFile("ERROR - Please make sure that each textmessage in the config file is at least one character long.")
+        raise ValueError('Please make sure that each textmessage in the config file is at least one character long.')
+print("5")
 
 # try:
 #     repeat = int(repeat)
