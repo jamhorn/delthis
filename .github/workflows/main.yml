@@ -1,7 +1,6 @@
 name: sendStGn
 
 on:
-  push:
   schedule:
     - cron: "55 17 * * *"    #runs at 17:55 UTC everyday
 

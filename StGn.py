@@ -155,7 +155,7 @@ elif len(timeToSend) == 2: #There are 2 timestamps, so we will select a random t
 
 
 WriteToLogFile("'" + textToSend + "' will be send at: " + str(datetime.timedelta(seconds=timeToSendSeconds + currentTime)))
-#time.sleep(timeToSendSeconds) #hiberante/pause the program, until it can send the message
+time.sleep(timeToSendSeconds) #hiberante/pause the program, until it can send the message
 
 
 payload = {
